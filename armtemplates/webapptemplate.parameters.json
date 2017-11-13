@@ -3,10 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "webAppName": {
-          "value": "pocozkara"
+          "value": "doesnotexist"
         },
         "appServicePlanName": {
-          "value": "serviceplan-pocozkara"
+          "value": "serviceplan-doesnotexist"
         }
     }
 }
