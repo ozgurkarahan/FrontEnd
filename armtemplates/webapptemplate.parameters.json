@@ -20,16 +20,13 @@
         "BackEndResourceId": {
           "value": "#{BackEndResourceId}#"
         },
-        "CallbackPath": {
-          "value": "#{CallbackPath}#"
-        },
         "PostLogoutRedirectUri": {
           "value": "#{PostLogoutRedirectUri}#"
         },
         "BackendUrl": {
           "value": "#{BackendUrl}#"
         },
-        "Ocp-Apim-Subscription-Key": {
+        "OcpApimSubscriptionKey": {
           "value": "#{Ocp-Apim-Subscription-Key}#"
         }
     }

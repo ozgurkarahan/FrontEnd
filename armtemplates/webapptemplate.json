@@ -27,7 +27,7 @@
 		"BackendUrl": {
 			"type": "string"
 		},
-		"Ocp-Apim-Subscription-Key": {
+		"OcpApimSubscriptionKey": {
 			"type": "string"
 		}		
 	},
@@ -115,7 +115,7 @@
 							"name": "BackendUrl", "value": "[parameters('BackendUrl')]"
 						},
 						{
-							"name": "Ocp-Apim-Subscription-Key", "value": "[parameters('Ocp-Apim-Subscription-Key')]"
+							"name": "Ocp-Apim-Subscription-Key", "value": "[parameters('OcpApimSubscriptionKey')]"
 						},
 						{
                             "name": "ApplicationInsights:InstrumentationKey",
