@@ -27,7 +27,7 @@
           "value": "#{BackendUrl}#"
         },
         "OcpApimSubscriptionKey": {
-          "value": "#{Ocp-Apim-Subscription-Key}#"
+          "value": "#{OcpApimSubscriptionKey}#"
         }
     }
   }
