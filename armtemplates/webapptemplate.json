@@ -7,7 +7,29 @@
 		},
 		"appServicePlanName": {
 			"type": "string"
+		},
+		"ClientId": {
+			"type": "string"
+		},
+		"ClientSecret": {
+			"type": "string"
+		},
+		"Authority": {
+			"type": "string"
 		}
+		,
+		"BackEndResourceId": {
+			"type": "string"
+		},
+		"PostLogoutRedirectUri": {
+			"type": "string"
+		},
+		"BackendUrl": {
+			"type": "string"
+		},
+		"Ocp-Apim-Subscription-Key": {
+			"type": "string"
+		}		
 	},
 	"variables": {
         "webapp-Front": "[parameters('webAppName')]",
@@ -75,25 +97,25 @@
 					"javaVersion": null,
                     "appSettings": [                        						
 						{
-							"name": "OpenIdConnect:ClientId",	"value": "#{ClientId}#"
+							"name": "OpenIdConnect:ClientId",	"value": "[parameters('ClientId')]"
 						},
 						{
-							"name": "OpenIdConnect:ClientSecret",	"value": "#{ClientSecret}#"
+							"name": "OpenIdConnect:ClientSecret",	"value": "[parameters('ClientSecret')]"
 						},
 						{
-							"name": "OpenIdConnect:Authority",	"value": "#{Authority}#"
+							"name": "OpenIdConnect:Authority",	"value": "[parameters('Authority')]"
 						},
 						{
-							"name": "OpenIdConnect:BackEndResourceId",	"value": "#{BackEndResourceId}#"
+							"name": "OpenIdConnect:BackEndResourceId",	"value": "[parameters('BackEndResourceId')]"
 						},
 						{
-							"name": "OpenIdConnect:PostLogoutRedirectUri",	"value": "#{PostLogoutRedirectUri}#"
+							"name": "OpenIdConnect:PostLogoutRedirectUri",	"value": "[parameters('PostLogoutRedirectUri')]"
 						},
 						{
-							"name": "BackendUrl", "value": "#{BackendUrl}#"
+							"name": "BackendUrl", "value": "[parameters('BackendUrl')]"
 						},
 						{
-							"name": "Ocp-Apim-Subscription-Key", "value": "#{Ocp-Apim-Subscription-Key}#"
+							"name": "Ocp-Apim-Subscription-Key", "value": "[parameters('Ocp-Apim-Subscription-Key')]"
 						},
 						{
                             "name": "ApplicationInsights:InstrumentationKey",

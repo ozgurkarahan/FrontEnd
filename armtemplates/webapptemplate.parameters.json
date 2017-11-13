@@ -3,10 +3,34 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "webAppName": {
-          "value": "doesnotexist"
+          "value": "#{webAppName}#"
         },
         "appServicePlanName": {
-          "value": "serviceplan-doesnotexist"
+          "value": "#{appServicePlanName}#"
+        },
+        "ClientId": {
+          "value": "#{ClientId}#"
+        },
+        "ClientSecret": {
+          "value": "#{ClientSecret}#"
+        },
+        "Authority": { 
+          "value": "#{Authority}#"
+        },
+        "BackEndResourceId": {
+          "value": "#{BackEndResourceId}#"
+        },
+        "CallbackPath": {
+          "value": "#{CallbackPath}#"
+        },
+        "PostLogoutRedirectUri": {
+          "value": "#{PostLogoutRedirectUri}#"
+        },
+        "BackendUrl": {
+          "value": "#{BackendUrl}#"
+        },
+        "Ocp-Apim-Subscription-Key": {
+          "value": "#{Ocp-Apim-Subscription-Key}#"
         }
     }
-}
+  }
