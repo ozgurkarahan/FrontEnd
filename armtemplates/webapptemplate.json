@@ -73,14 +73,31 @@
 					"phpVersion": "",
 					"pythonVersion": "",
 					"javaVersion": null,
-                    "appSettings": [
-                        {
-                            "name": "appInsights:instrumentationKey",
-                            "value": "[reference(concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Insights/components/', variables('appInsights-Front'))).InstrumentationKey]"
+                    "appSettings": [                        						
+						{
+							"name": "OpenIdConnect:ClientId",	"value": "#{ClientId}#"
 						},
 						{
-							"name": "BackendUrl",
-							"value": "APIM"
+							"name": "OpenIdConnect:ClientSecret",	"value": "#{ClientSecret}#"
+						},
+						{
+							"name": "OpenIdConnect:Authority",	"value": "#{Authority}#"
+						},
+						{
+							"name": "OpenIdConnect:BackEndResourceId",	"value": "#{BackEndResourceId}#"
+						},
+						{
+							"name": "OpenIdConnect:PostLogoutRedirectUri",	"value": "#{PostLogoutRedirectUri}#"
+						},
+						{
+							"name": "BackendUrl", "value": "#{BackendUrl}#"
+						},
+						{
+							"name": "Ocp-Apim-Subscription-Key", "value": "#{Ocp-Apim-Subscription-Key}#"
+						},
+						{
+                            "name": "ApplicationInsights:InstrumentationKey",
+                            "value": "[reference(concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Insights/components/', variables('appInsights-Front'))).InstrumentationKey]"
 						}
                     ]
 				}
