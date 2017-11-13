@@ -1,0 +1,92 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"webAppName": {
+			"type": "string"
+		},
+		"appServicePlanName": {
+			"type": "string"
+		}
+	},
+	"variables": {
+        "webapp-Front": "[parameters('webAppName')]",
+        "serviceplan": "[parameters('appServicePlanName')]",
+        "appInsights-Front": "[concat(variables('webapp-Front'), '-appinsights')]"
+    },
+	"resources": [
+		{
+			"name": "[variables('appInsights-Front')]",
+			"type": "Microsoft.Insights/components",
+			"location": "[resourceGroup().location]",
+			"apiVersion": "2014-04-01",
+			"dependsOn": [],
+			"tags": {
+				"displayName": "[concat('Component', variables('appInsights-Front'))]"
+			},
+			"properties": {
+				"applicationId": "variables('appInsights-Front')"
+			}
+		},
+		{
+            "name": "[variables('serviceplan')]",
+            "type": "Microsoft.Web/serverfarms",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2016-09-01",
+            "dependsOn": [],
+            "tags": {
+                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('serviceplan'))]": "Resource",
+                "displayName": "[variables('serviceplan')]"
+            },
+            "properties": {
+                "name": "[variables('serviceplan')]",
+                "perSiteScaling": true
+            },
+            "sku": {
+                "tier": "Basic",
+                "name": "B1",
+                "size": "B1",
+                "family": "B",
+                "capacity": 1
+            }
+        },
+        {
+			"name": "[variables('webapp-Front')]",
+			"type": "Microsoft.Web/sites",
+			"location": "[resourceGroup().location]",
+			"apiVersion": "2016-08-01",
+			"dependsOn": [
+                "[variables('appInsights-Front')]",
+                "[variables('serviceplan')]"
+			],
+			"tags": {
+				"displayName": "[variables('webapp-Front')]"
+			},
+			"properties": {
+				"name": "[variables('webapp-Front')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('serviceplan'))]",
+				"clientAffinityEnabled": false,
+				"siteConfig": {
+					"AlwaysOn": true,
+					"use32BitWorkerProcess": false,
+					"clientAffinityEnabled": false,
+					"phpVersion": "",
+					"pythonVersion": "",
+					"javaVersion": null,
+                    "appSettings": [
+                        {
+                            "name": "appInsights:instrumentationKey",
+                            "value": "[reference(concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Insights/components/', variables('appInsights-Front'))).InstrumentationKey]"
+						},
+						{
+							"name": "BackendUrl",
+							"value": "APIM"
+						}
+                    ]
+				}
+			}
+		}
+	],
+	"outputs": {
+	}
+}
