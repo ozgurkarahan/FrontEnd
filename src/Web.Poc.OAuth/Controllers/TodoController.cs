@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -103,15 +104,15 @@ namespace Web.Poc.OAuth.Controllers
                 {
                     //
                     // If the call failed with access denied, then drop the current access token from the cache, 
-                    //     and show the user an error indicating they might need to sign-in again.
                     //
                     if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                     {
                         ClearTokens(authContext);
-                        ViewBag.ErrorMessage = "UnexpectedError";                                                
-                        itemList.Add(new TodoItem { Title = "(No items in list)" });
-                        return View(itemList);
                     }
+
+                    ViewBag.ErrorMessage = $"UnexpectedError: {response.StatusCode}";
+                    itemList.Add(new TodoItem { Title = "(No items in list)" });
+                    return View(itemList);
                 }
             }
             catch (Exception ee)
@@ -133,10 +134,6 @@ namespace Web.Poc.OAuth.Controllers
                 ViewBag.ErrorMessage = "AuthorizationRequired";
                 return View(itemList);
             }
-            //
-            // If the call failed for any other reason, show the user an error.
-            //
-            return View("Error");
         }
 
         [HttpPost]
@@ -211,5 +208,10 @@ namespace Web.Poc.OAuth.Controllers
             return View("Error");
         }
 
+        [AllowAnonymous]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
