@@ -78,8 +78,8 @@
 			"location": "[resourceGroup().location]",
 			"apiVersion": "2016-08-01",
 			"dependsOn": [
-                "[variables('appInsights-Front')]",
-                "[variables('serviceplan')]"
+                "[resourceId('Microsoft.Insights/components', variables('appInsights-Front'))]",
+                "[resourceId('Microsoft.Web/serverfarms', variables('serviceplan'))]"
 			],
 			"tags": {
 				"displayName": "[variables('webapp-Front')]"
